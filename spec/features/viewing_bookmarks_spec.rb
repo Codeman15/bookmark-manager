@@ -1,15 +1,14 @@
-feature 'Viewing bookmarks' do
-  scenario 'Visiting index page' do
+feature 'viewing bookmarks' do
+  scenario 'bookmarks are visible' do
 
-    # Adding the test data
-    Bookmark.create(url: "http://www.makersacademy.com")
-    Bookmark.create(url: "http://www.twitter.com")
-    Bookmark.create(url: "http://www.google.com")
+    Bookmark.create(url: 'http://www.makersacademy.com', title: 'makers')
+    Bookmark.create(url: 'http://www.twitter.com', title: 'twitter')
+    Bookmark.create(url: 'http://www.google.com', title: 'google')
 
-    visit('/bookmarks')
+    visit '/bookmarks'
 
-    expect(page).to have_content "http://www.makersacademy.com"
-    expect(page).to have_content "http://www.twitter.com"
-    expect(page).to have_content "http://www.google.com"
+    expect(page).to have_link('makers', href: 'http://www.makersacademy.com')
+    expect(page).to have_link('twitter',  href: 'http://www.twitter.com')
+    expect(page).to have_link('google', href: 'http://www.google.com')
+    end
   end
-end
