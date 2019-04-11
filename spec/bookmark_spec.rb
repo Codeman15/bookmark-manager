@@ -63,6 +63,6 @@ describe Bookmark do
       expect(result.id).to eq bookmark.id
       expect(result.title).to eq 'makers'
       expect(result.url).to eq 'http://www.makersacademy.com'
-      end
     end
+  end
 end
