@@ -1,10 +1,13 @@
 require 'sinatra/base'
 require './lib/bookmark'
 require './lib/database_connection_setup.rb'
+require 'uri'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
 
   enable :sessions, :method_override
+  register Sinatra::Flash
 
   get '/bookmarks' do
     @bookmarks = Bookmark.all
@@ -15,8 +18,8 @@ class BookmarkManager < Sinatra::Base
     erb :'bookmarks/new'
   end
 
-  post '/bookmarks/new' do
-    Bookmark.create(url: params[:url], title: params[:title])
+  post '/bookmarks' do
+    flash[:notice] = "You must submit a valid URL." unless Bookmark.create(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 
@@ -44,7 +47,6 @@ class BookmarkManager < Sinatra::Base
     Comment.create(text: params[:comment], bookmark_id: params[:id])
     redirect '/bookmarks'
   end
-
 
   # start the server if ruby file executed directly
   run! if app_file == $0

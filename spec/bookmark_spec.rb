@@ -31,14 +31,18 @@ describe Bookmark do
       expect(bookmark.title).to eq 'Test Bookmark'
       expect(bookmark.url).to eq 'http://www.testbookmark.com'
     end
+
+    it 'does not create a new bookmark if the URL is not valid' do
+      Bookmark.create(url: 'not a real bookmark', title: 'not a real bookmark')
+      expect(Bookmark.all).not_to include 'not a real bookmark'
+    end
   end
 
   describe '.delete' do
     it 'deletes the given bookmark' do
-      bookmark = Bookmark.create(title: "makers", url: "bookmark_manager_test")
+      bookmark = Bookmark.create(title: "makers", url: "http://www.makersacademy.com")
       Bookmark.delete(id: bookmark.id)
       expect(Bookmark.all.length).to eq 0
-
     end
   end
 
