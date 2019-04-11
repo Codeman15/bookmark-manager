@@ -29,7 +29,7 @@
 
         <div>
           <h2>Comments<h2>
-        <ul>
+        <ul style="list-style-type: none">
           <% bookmark.comments.each do |comment| %>
             <li><%= comment.text %></li>
           <% end %>
@@ -38,7 +38,7 @@
 
         <div>
           <h2>Tags<h2>
-            <ul>
+            <ul style="list-style-type: none">
               <% bookmark.tags.each do |tag| %>
                 <li><%= tag.content %></li>
               <% end %>
