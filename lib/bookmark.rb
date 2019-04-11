@@ -38,4 +38,12 @@ class Bookmark
     result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = #{id}")
     Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
+
+  def comments
+    DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id = #{id};")
+  end
+
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: id)
+  end
 end
